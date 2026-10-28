@@ -21,6 +21,7 @@ import {
   paginas,
   seleccionarCoincidentes,
 } from "@/lib/etl"
+import MapaCiudades from "@/components/mapa-ciudades"
 
 type FaseEstado = "pendiente" | "en curso" | "completada" | "con errores"
 type Fase = {
@@ -446,28 +447,48 @@ export default function Page() {
   ]
 
   return (
-    <main className="min-h-screen bg-[#f5f7fa] text-slate-900">
-      <header className="border-b border-slate-200 bg-white">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
+    <main className="min-h-screen bg-[radial-gradient(ellipse_at_top,_rgba(56,189,248,0.13),_transparent_38%),linear-gradient(180deg,#f3f8fc_0%,#f8fafc_55%,#f1f5f9_100%)] text-slate-900">
+      <header className="border-b border-white/10 bg-slate-950 text-white shadow-xl shadow-slate-900/10">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-5">
           <div className="flex items-center gap-3">
-            <div className="rounded-lg bg-sky-100 p-2 text-sky-700">
+            <div className="rounded-xl bg-gradient-to-br from-cyan-300 to-sky-500 p-2.5 text-slate-950 shadow-lg shadow-cyan-500/20">
               <Cloud size={22} />
             </div>
             <div>
-              <p className="text-xs font-semibold tracking-[.18em] text-sky-700 uppercase">
+              <p className="text-[11px] font-bold tracking-[.2em] text-cyan-300 uppercase">
                 Aula de Big Data
               </p>
-              <h1 className="text-lg font-bold">
+              <h1 className="text-lg font-bold tracking-tight sm:text-xl">
                 Laboratorio de pipeline meteorológico
               </h1>
             </div>
           </div>
-          <span className="hidden items-center gap-2 rounded-full bg-slate-100 px-3 py-1.5 text-xs text-slate-600 sm:flex">
-            <Activity size={14} /> Datos reales · UTC
+          <span className="hidden items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-2 text-xs font-medium text-slate-200 sm:flex">
+            <Activity size={14} className="text-emerald-400" /> Datos reales · UTC
           </span>
         </div>
       </header>
-      <div className="mx-auto max-w-7xl space-y-6 px-5 py-6">
+      <div className="mx-auto max-w-7xl space-y-6 px-5 py-8 sm:py-10">
+        <section className="relative overflow-hidden rounded-3xl border border-sky-100 bg-gradient-to-br from-white via-white to-sky-50 p-6 shadow-[0_24px_70px_-40px_rgba(2,132,199,0.35)] sm:p-8">
+          <div className="pointer-events-none absolute -right-12 -top-16 size-56 rounded-full bg-cyan-200/30 blur-3xl" />
+          <div className="relative max-w-3xl">
+            <span className="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50 px-3 py-1 text-[11px] font-bold tracking-[.14em] text-sky-800 uppercase">
+              <span className="size-1.5 rounded-full bg-emerald-500" /> Centro de control
+            </span>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
+              Datos del tiempo, de forma clara.
+            </h2>
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-600 sm:text-base">
+              Extrae observaciones horarias, revisa cada fase del proceso y carga
+              en Supabase solo los registros seleccionados.
+            </p>
+            <div className="mt-5 flex flex-wrap gap-2 text-xs font-medium text-slate-600">
+              <span className="rounded-full bg-white px-3 py-1.5 shadow-sm ring-1 ring-slate-200">Open-Meteo Archive</span>
+              <span className="rounded-full bg-white px-3 py-1.5 shadow-sm ring-1 ring-slate-200">5 ciudades</span>
+              <span className="rounded-full bg-white px-3 py-1.5 shadow-sm ring-1 ring-slate-200">UTC · C · mm</span>
+            </div>
+          </div>
+        </section>
         <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
           <div className="mb-4 flex items-center gap-2">
             <Wind className="text-sky-700" size={18} />
@@ -480,7 +501,7 @@ export default function Page() {
                 {CIUDADES.map((c) => (
                   <label
                     key={c.nombre}
-                    className={`cursor-pointer rounded-lg border px-3 py-2 text-sm ${selectedCities.includes(c.nombre) ? "border-sky-600 bg-sky-50 text-sky-800" : "border-slate-200"}`}
+                    className={`cursor-pointer rounded-xl border px-3.5 py-2.5 text-sm font-medium transition-all ${selectedCities.includes(c.nombre) ? "border-sky-600 bg-sky-50 text-sky-800 shadow-sm ring-2 ring-sky-100" : "border-slate-200 bg-white text-slate-600 hover:border-sky-300 hover:bg-sky-50/50"}`}
                   >
                     <input
                       className="sr-only"
@@ -503,7 +524,7 @@ export default function Page() {
                   Desde
                   <input
                     type="date"
-                    className="mt-1 block rounded-lg border border-slate-300 px-3 py-2"
+                    className="mt-1 block rounded-xl border border-slate-200 bg-white px-3 py-2.5 shadow-sm outline-none transition focus:border-sky-500 focus:ring-4 focus:ring-sky-100"
                     value={desde}
                     onChange={(e) => setDesde(e.target.value)}
                   />
@@ -512,7 +533,7 @@ export default function Page() {
                   Hasta
                   <input
                     type="date"
-                    className="mt-1 block rounded-lg border border-slate-300 px-3 py-2"
+                    className="mt-1 block rounded-xl border border-slate-200 bg-white px-3 py-2.5 shadow-sm outline-none transition focus:border-sky-500 focus:ring-4 focus:ring-sky-100"
                     value={hasta}
                     onChange={(e) => setHasta(e.target.value)}
                   />
@@ -520,7 +541,7 @@ export default function Page() {
                 <button
                   disabled={busyCities || !selectedCities.length}
                   onClick={() => extraction(selectedCities)}
-                  className="inline-flex h-10 items-center gap-2 rounded-lg bg-sky-700 px-4 font-semibold text-white hover:bg-sky-800 disabled:opacity-50"
+                  className="inline-flex h-11 items-center gap-2 rounded-xl bg-sky-700 px-5 font-semibold text-white shadow-lg shadow-sky-900/15 transition hover:-translate-y-0.5 hover:bg-sky-800 disabled:translate-y-0 disabled:opacity-50"
                 >
                   {busyCities ? (
                     <LoaderCircle className="animate-spin" size={16} />
@@ -531,7 +552,7 @@ export default function Page() {
                 </button>
               </div>
             </div>
-            <div className="rounded-xl bg-slate-50 p-4">
+            <div className="rounded-2xl border border-slate-100 bg-gradient-to-br from-slate-50 to-sky-50/70 p-5">
               <p className="text-xs font-semibold tracking-wide text-slate-500 uppercase">
                 Volumen previsto
               </p>
@@ -589,6 +610,16 @@ export default function Page() {
           )}
         </section>
 
+        <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div className="mb-4">
+            <h2 className="font-semibold">Mapa de ciudades</h2>
+            <p className="mt-1 text-sm text-slate-600">
+              UbicaciÃ³n de las cinco ciudades incluidas en la extracciÃ³n.
+            </p>
+          </div>
+          <MapaCiudades />
+        </section>
+
         <section>
           <div className="mb-3 flex items-center justify-between">
             <h2 className="font-semibold">2. Estado del pipeline</h2>
@@ -608,11 +639,11 @@ export default function Page() {
               }
             </div>
           </div>
-          <div className="grid gap-3 md:grid-cols-5">
+          <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
             {phases.map((p, i) => (
               <article
                 key={p.name}
-                className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm"
+                className="rounded-2xl border border-slate-200/80 bg-white p-4 shadow-sm transition duration-200 hover:-translate-y-0.5 hover:shadow-md"
               >
                 <div className="flex items-start justify-between">
                   <span className="text-xs font-medium text-slate-400">
@@ -681,7 +712,7 @@ export default function Page() {
                     { n: "Seleccionados para cargar", v: chosenInView.length },
                   ] as const
                 ).map(({ n, v }) => (
-                  <div key={n} className="rounded-lg bg-slate-50 p-3">
+                  <div key={n} className="rounded-2xl border border-slate-100 bg-gradient-to-br from-slate-50 to-white p-4 shadow-sm">
                     <p className="text-[11px] text-slate-500">{n}</p>
                     <p className="mt-1 text-xl font-bold tabular-nums">{v}</p>
                   </div>

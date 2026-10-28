@@ -1,6 +1,7 @@
 import { Geist_Mono, Inter } from "next/font/google"
 import type { Metadata } from "next"
 
+import "@maptiler/sdk/dist/maptiler-sdk.css"
 import "./globals.css"
 import { cn } from "@/lib/utils"
 
