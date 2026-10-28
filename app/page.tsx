@@ -491,12 +491,12 @@ export default function Page() {
           </div>
         </section>
         <div className="grid items-stretch gap-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
-          <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <section className="flex flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
             <div className="mb-4 flex items-center gap-2">
               <Wind className="text-sky-700" size={18} />
               <h2 className="font-semibold">1. Configuración de extracción</h2>
             </div>
-            <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_260px]">
+            <div className="my-auto grid gap-5 xl:grid-cols-[minmax(0,1fr)_260px]">
               <div>
                 <p className="mb-2 text-sm text-slate-600">Ciudades</p>
                 <div className="flex flex-wrap gap-2">
