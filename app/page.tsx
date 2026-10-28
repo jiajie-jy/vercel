@@ -12,6 +12,7 @@ import {
   LoaderCircle,
   RefreshCw,
   Wind,
+  MapPin,
 } from "lucide-react"
 import {
   CIUDADES,
@@ -489,136 +490,141 @@ export default function Page() {
             </div>
           </div>
         </section>
-        <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-          <div className="mb-4 flex items-center gap-2">
-            <Wind className="text-sky-700" size={18} />
-            <h2 className="font-semibold">1. Configuración de extracción</h2>
-          </div>
-          <div className="grid gap-5 lg:grid-cols-[1fr_300px]">
-            <div>
-              <p className="mb-2 text-sm text-slate-600">Ciudades</p>
-              <div className="flex flex-wrap gap-2">
-                {CIUDADES.map((c) => (
-                  <label
-                    key={c.nombre}
-                    className={`cursor-pointer rounded-xl border px-3.5 py-2.5 text-sm font-medium transition-all ${selectedCities.includes(c.nombre) ? "border-sky-600 bg-sky-50 text-sky-800 shadow-sm ring-2 ring-sky-100" : "border-slate-200 bg-white text-slate-600 hover:border-sky-300 hover:bg-sky-50/50"}`}
-                  >
-                    <input
-                      className="sr-only"
-                      type="checkbox"
-                      checked={selectedCities.includes(c.nombre)}
-                      onChange={() =>
-                        setSelectedCities((s) =>
-                          s.includes(c.nombre)
-                            ? s.filter((n) => n !== c.nombre)
-                            : [...s, c.nombre]
-                        )
-                      }
-                    />
-                    {c.nombre}
-                  </label>
-                ))}
-              </div>
-              <div className="mt-4 flex flex-wrap items-end gap-3">
-                <label className="text-sm">
-                  Desde
-                  <input
-                    type="date"
-                    className="mt-1 block rounded-xl border border-slate-200 bg-white px-3 py-2.5 shadow-sm outline-none transition focus:border-sky-500 focus:ring-4 focus:ring-sky-100"
-                    value={desde}
-                    onChange={(e) => setDesde(e.target.value)}
-                  />
-                </label>
-                <label className="text-sm">
-                  Hasta
-                  <input
-                    type="date"
-                    className="mt-1 block rounded-xl border border-slate-200 bg-white px-3 py-2.5 shadow-sm outline-none transition focus:border-sky-500 focus:ring-4 focus:ring-sky-100"
-                    value={hasta}
-                    onChange={(e) => setHasta(e.target.value)}
-                  />
-                </label>
-                <button
-                  disabled={busyCities || !selectedCities.length}
-                  onClick={() => extraction(selectedCities)}
-                  className="inline-flex h-11 items-center gap-2 rounded-xl bg-sky-700 px-5 font-semibold text-white shadow-lg shadow-sky-900/15 transition hover:-translate-y-0.5 hover:bg-sky-800 disabled:translate-y-0 disabled:opacity-50"
-                >
-                  {busyCities ? (
-                    <LoaderCircle className="animate-spin" size={16} />
-                  ) : (
-                    <Cloud size={16} />
-                  )}{" "}
-                  Extraer datos
-                </button>
-              </div>
+        <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
+          <section className="self-start rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <div className="mb-4 flex items-center gap-2">
+              <Wind className="text-sky-700" size={18} />
+              <h2 className="font-semibold">1. Configuración de extracción</h2>
             </div>
-            <div className="rounded-2xl border border-slate-100 bg-gradient-to-br from-slate-50 to-sky-50/70 p-5">
-              <p className="text-xs font-semibold tracking-wide text-slate-500 uppercase">
-                Volumen previsto
-              </p>
-              <p className="mt-2 text-2xl font-bold tabular-nums">
-                {Math.max(
-                  0,
-                  Math.floor(
-                    (new Date(`${hasta}T00:00:00Z`).getTime() -
-                      new Date(`${desde}T00:00:00Z`).getTime()) /
-                      86400000 +
-                      1
-                  )
-                ) *
-                  selectedCities.length *
-                  24}{" "}
-                <span className="text-sm font-normal text-slate-500">
-                  registros horarios
-                </span>
-              </p>
-              <p className="mt-1 text-xs text-slate-500">
-                Máximo 31 días · 3 variables por hora · °C, %, mm · UTC
-              </p>
-            </div>
-          </div>
-          {notice && (
-            <p
-              role="status"
-              className="mt-4 rounded-lg bg-amber-50 p-3 text-sm text-amber-900"
-            >
-              {notice}
-            </p>
-          )}
-          {Object.keys(cityError).some((c) => cityError[c]) && (
-            <div className="mt-4 space-y-2">
-              {Object.entries(cityError)
-                .filter(([, e]) => e)
-                .map(([city, error]) => (
-                  <div
-                    key={city}
-                    className="flex items-center justify-between rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-800"
-                  >
-                    <span>
-                      {city}: {error}
-                    </span>
-                    <button
-                      disabled={busyCities}
-                      className="font-semibold underline"
-                      onClick={() => extraction([city])}
+            <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_260px]">
+              <div>
+                <p className="mb-2 text-sm text-slate-600">Ciudades</p>
+                <div className="flex flex-wrap gap-2">
+                  {CIUDADES.map((c) => (
+                    <label
+                      key={c.nombre}
+                      className={`cursor-pointer rounded-xl border px-3.5 py-2.5 text-sm font-medium transition-all ${selectedCities.includes(c.nombre) ? "border-sky-600 bg-sky-50 text-sky-800 shadow-sm ring-2 ring-sky-100" : "border-slate-200 bg-white text-slate-600 hover:border-sky-300 hover:bg-sky-50/50"}`}
                     >
-                      Reintentar ciudad
-                    </button>
-                  </div>
-                ))}
+                      <input
+                        className="sr-only"
+                        type="checkbox"
+                        checked={selectedCities.includes(c.nombre)}
+                        onChange={() =>
+                          setSelectedCities((s) =>
+                            s.includes(c.nombre)
+                              ? s.filter((n) => n !== c.nombre)
+                              : [...s, c.nombre]
+                          )
+                        }
+                      />
+                      {c.nombre}
+                    </label>
+                  ))}
+                </div>
+                <div className="mt-4 flex flex-wrap items-end gap-3">
+                  <label className="text-sm">
+                    Desde
+                    <input
+                      type="date"
+                      className="mt-1 block rounded-xl border border-slate-200 bg-white px-3 py-2.5 shadow-sm outline-none transition focus:border-sky-500 focus:ring-4 focus:ring-sky-100"
+                      value={desde}
+                      onChange={(e) => setDesde(e.target.value)}
+                    />
+                  </label>
+                  <label className="text-sm">
+                    Hasta
+                    <input
+                      type="date"
+                      className="mt-1 block rounded-xl border border-slate-200 bg-white px-3 py-2.5 shadow-sm outline-none transition focus:border-sky-500 focus:ring-4 focus:ring-sky-100"
+                      value={hasta}
+                      onChange={(e) => setHasta(e.target.value)}
+                    />
+                  </label>
+                  <button
+                    disabled={busyCities || !selectedCities.length}
+                    onClick={() => extraction(selectedCities)}
+                    className="inline-flex h-11 items-center gap-2 rounded-xl bg-sky-700 px-5 font-semibold text-white shadow-lg shadow-sky-900/15 transition hover:-translate-y-0.5 hover:bg-sky-800 disabled:translate-y-0 disabled:opacity-50"
+                  >
+                    {busyCities ? (
+                      <LoaderCircle className="animate-spin" size={16} />
+                    ) : (
+                      <Cloud size={16} />
+                    )}{" "}
+                    Extraer datos
+                  </button>
+                </div>
+              </div>
+              <div className="rounded-2xl border border-slate-100 bg-gradient-to-br from-slate-50 to-sky-50/70 p-5">
+                <p className="text-xs font-semibold tracking-wide text-slate-500 uppercase">
+                  Volumen previsto
+                </p>
+                <p className="mt-2 text-2xl font-bold tabular-nums">
+                  {Math.max(
+                    0,
+                    Math.floor(
+                      (new Date(`${hasta}T00:00:00Z`).getTime() -
+                        new Date(`${desde}T00:00:00Z`).getTime()) /
+                        86400000 +
+                        1
+                    )
+                  ) *
+                    selectedCities.length *
+                    24}{" "}
+                  <span className="text-sm font-normal text-slate-500">
+                    registros horarios
+                  </span>
+                </p>
+                <p className="mt-1 text-xs text-slate-500">
+                  Máximo 31 días · 3 variables por hora · °C, %, mm · UTC
+                </p>
+              </div>
             </div>
-          )}
-        </section>
+            {notice && (
+              <p
+                role="status"
+                className="mt-4 rounded-lg bg-amber-50 p-3 text-sm text-amber-900"
+              >
+                {notice}
+              </p>
+            )}
+            {Object.keys(cityError).some((c) => cityError[c]) && (
+              <div className="mt-4 space-y-2">
+                {Object.entries(cityError)
+                  .filter(([, e]) => e)
+                  .map(([city, error]) => (
+                    <div
+                      key={city}
+                      className="flex items-center justify-between rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-800"
+                    >
+                      <span>
+                        {city}: {error}
+                      </span>
+                      <button
+                        disabled={busyCities}
+                        className="font-semibold underline"
+                        onClick={() => extraction([city])}
+                      >
+                        Reintentar ciudad
+                      </button>
+                    </div>
+                  ))}
+              </div>
+            )}
+          </section>
 
-        <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-          <div className="mb-4">
-            <h2 className="font-semibold">Mapa de ciudades</h2>
-            <p className="mt-1 text-sm text-slate-600">
-              UbicaciÃ³n de las cinco ciudades incluidas en la extracciÃ³n.
-            </p>
-          </div>
-          <MapaCiudades />
-        </section>
+          <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <div className="mb-4">
+              <h2 className="flex items-center gap-2 font-semibold">
+                <MapPin size={16} className="text-sky-700" />
+                Mapa de ciudades
+              </h2>
+              <p className="mt-1 text-sm text-slate-600">
+                UbicaciÃ³n de las cinco ciudades incluidas en la extracciÃ³n.
+              </p>
+            </div>
+            <MapaCiudades />
+          </section>
+        </div>
 
         <section>
           <div className="mb-3 flex items-center justify-between">
