@@ -60,7 +60,7 @@ export default function MapaCiudades() {
       <div
         ref={contenedor}
         aria-label="Mapa de España con las ciudades meteorológicas"
-        className="h-[420px] w-full overflow-hidden rounded-xl"
+        className="h-[320px] w-full overflow-hidden rounded-xl lg:h-[360px]"
       />
       {error && (
         <p role="status" className="p-4 text-sm text-amber-800">

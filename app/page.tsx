@@ -496,8 +496,8 @@ export default function Page() {
               <Wind className="text-sky-700" size={18} />
               <h2 className="font-semibold">1. Configuración de extracción</h2>
             </div>
-            <div className="my-auto grid gap-5 xl:grid-cols-[minmax(0,1fr)_260px]">
-              <div>
+            <div className="flex-1 grid gap-5 xl:grid-cols-[minmax(0,1fr)_260px]">
+              <div className="flex flex-col justify-center">
                 <p className="mb-2 text-sm text-slate-600">Ciudades</p>
                 <div className="flex flex-wrap gap-2">
                   {CIUDADES.map((c) => (
@@ -554,7 +554,7 @@ export default function Page() {
                   </button>
                 </div>
               </div>
-              <div className="rounded-2xl border border-slate-100 bg-gradient-to-br from-slate-50 to-sky-50/70 p-5">
+              <div className="flex flex-col justify-center rounded-2xl border border-slate-100 bg-gradient-to-br from-slate-50 to-sky-50/70 p-5">
                 <p className="text-xs font-semibold tracking-wide text-slate-500 uppercase">
                   Volumen previsto
                 </p>
@@ -612,7 +612,7 @@ export default function Page() {
             )}
           </section>
 
-          <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <section className="flex flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
             <div className="mb-4">
               <h2 className="flex items-center gap-2 font-semibold">
                 <MapPin size={16} className="text-sky-700" />
