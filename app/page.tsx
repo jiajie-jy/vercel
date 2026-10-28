@@ -42,7 +42,7 @@ export default function Page() {
   const [mounted, setMounted] = useState(false)
   const [desde, setDesde] = useState("2026-09-01")
   const [hasta, setHasta] = useState("2026-09-30")
-  const [selectedCities, setSelectedCities] = useState<string[]>(["Barcelona"])
+  const [selectedCities, setSelectedCities] = useState<string[]>(CIUDADES.map((ciudad) => ciudad.nombre))
   const [raw, setRaw] = useState<Record<string, unknown>>({})
   const [cityState, setCityState] =
     useState<Record<string, FaseEstado>>(estadosIniciales)
