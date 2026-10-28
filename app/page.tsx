@@ -490,8 +490,8 @@ export default function Page() {
             </div>
           </div>
         </section>
-        <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
-          <section className="self-start rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+        <div className="grid items-stretch gap-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
+          <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
             <div className="mb-4 flex items-center gap-2">
               <Wind className="text-sky-700" size={18} />
               <h2 className="font-semibold">1. Configuración de extracción</h2>
