@@ -470,24 +470,45 @@ export default function Page() {
         </div>
       </header>
       <div className="mx-auto max-w-7xl space-y-6 px-5 py-8 sm:py-10">
-        <section className="relative overflow-hidden rounded-3xl border border-sky-100 bg-gradient-to-br from-white via-white to-sky-50 p-6 shadow-[0_24px_70px_-40px_rgba(2,132,199,0.35)] sm:p-8">
-          <div className="pointer-events-none absolute -right-12 -top-16 size-56 rounded-full bg-cyan-200/30 blur-3xl" />
-          <div className="relative max-w-3xl">
+        <section className="relative isolate overflow-hidden rounded-3xl border border-slate-800 bg-[#07131f] p-6 text-white shadow-[0_28px_80px_-36px_rgba(8,47,73,0.55)] sm:p-8 lg:p-10">
+          <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_80%_20%,rgba(34,211,238,0.2),transparent_38%),radial-gradient(ellipse_at_5%_100%,rgba(14,165,233,0.15),transparent_42%)]" />
+          <div className="pointer-events-none absolute inset-0 -z-10 opacity-[0.08] [background-image:linear-gradient(rgba(255,255,255,.5)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.5)_1px,transparent_1px)] [background-size:36px_36px]" />
+          <div className="relative grid items-center gap-8 lg:grid-cols-[1.15fr_0.85fr]">
+          <div className="max-w-3xl">
             <span className="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50 px-3 py-1 text-[11px] font-bold tracking-[.14em] text-sky-800 uppercase">
-              <span className="size-1.5 rounded-full bg-emerald-500" /> Centro de control
+              <span className="size-1.5 animate-pulse rounded-full bg-emerald-500" /> Centro de control · en vivo
             </span>
-            <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
-              Datos del tiempo, de forma clara.
+            <h2 className="mt-5 text-4xl leading-[1.05] font-bold tracking-tight text-white sm:text-5xl">
+              El clima tiene <span className="text-cyan-300">datos que contar.</span>
             </h2>
-            <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-600 sm:text-base">
+            <p className="mt-4 max-w-2xl text-sm leading-6 text-slate-300 sm:text-base">
               Extrae observaciones horarias, revisa cada fase del proceso y carga
               en Supabase solo los registros seleccionados.
             </p>
-            <div className="mt-5 flex flex-wrap gap-2 text-xs font-medium text-slate-600">
-              <span className="rounded-full bg-white px-3 py-1.5 shadow-sm ring-1 ring-slate-200">Open-Meteo Archive</span>
-              <span className="rounded-full bg-white px-3 py-1.5 shadow-sm ring-1 ring-slate-200">5 ciudades</span>
-              <span className="rounded-full bg-white px-3 py-1.5 shadow-sm ring-1 ring-slate-200">UTC · C · mm</span>
+            <div className="mt-6 flex flex-wrap gap-2 text-xs font-medium text-slate-200">
+              <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5">Open-Meteo Archive</span>
+              <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5">5 ciudades</span>
+              <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5">UTC · °C · mm</span>
             </div>
+          </div>
+          <div className="relative mx-auto flex aspect-square w-full max-w-[300px] items-center justify-center lg:max-w-[320px]">
+            <div className="absolute inset-4 rounded-full border border-cyan-200/15" />
+            <div className="absolute inset-10 rounded-full border border-dashed border-cyan-200/20" />
+            <div className="absolute size-40 rounded-full bg-cyan-400/20 blur-3xl" />
+            <div className="relative flex size-36 items-center justify-center rounded-full border border-cyan-100/20 bg-gradient-to-br from-cyan-300/20 to-sky-500/5 shadow-[0_0_70px_-18px_rgba(34,211,238,0.55)] backdrop-blur-sm">
+              <Cloud size={72} strokeWidth={1.15} className="text-cyan-100 drop-shadow-[0_0_18px_rgba(103,232,249,0.55)]" />
+            </div>
+            <div className="absolute top-7 right-0 rounded-2xl border border-white/10 bg-slate-900/80 px-4 py-3 shadow-xl backdrop-blur-md">
+              <p className="text-[10px] font-semibold tracking-[.16em] text-cyan-200/70 uppercase">Cobertura</p>
+              <p className="mt-1 text-xl font-semibold tabular-nums">24<span className="ml-1 text-xs font-normal text-slate-400">h / día</span></p>
+            </div>
+            <div className="absolute bottom-7 left-0 rounded-2xl border border-white/10 bg-slate-900/80 px-4 py-3 shadow-xl backdrop-blur-md">
+              <p className="text-[10px] font-semibold tracking-[.16em] text-cyan-200/70 uppercase">Estaciones</p>
+              <p className="mt-1 text-xl font-semibold tabular-nums">05<span className="ml-1 text-xs font-normal text-slate-400">ciudades</span></p>
+            </div>
+            <span className="absolute top-1/2 right-3 size-2 rounded-full bg-cyan-200 shadow-[0_0_14px_4px_rgba(103,232,249,0.6)]" />
+            <span className="absolute bottom-10 right-12 size-1.5 rounded-full bg-sky-300 shadow-[0_0_12px_3px_rgba(125,211,252,0.5)]" />
+          </div>
           </div>
         </section>
         <div className="grid items-stretch gap-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
@@ -627,9 +648,9 @@ export default function Page() {
         </div>
 
         <section>
-          <div className="mb-3 flex items-center justify-between">
-            <h2 className="font-semibold">2. Estado del pipeline</h2>
-            <div className="text-xs text-slate-500">
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-white/85 px-5 py-4 shadow-sm backdrop-blur">
+            <h2 className="flex items-center gap-2 font-semibold tracking-tight"><span className="flex size-8 items-center justify-center rounded-xl bg-cyan-50 text-cyan-700"><Activity size={16} /></span>2. Estado del pipeline</h2>
+            <div className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs text-slate-600">
               Procesadas:{" "}
               {
                 selectedCities.filter(
@@ -649,7 +670,7 @@ export default function Page() {
             {phases.map((p, i) => (
               <article
                 key={p.name}
-                className="rounded-2xl border border-slate-200/80 bg-white p-4 shadow-sm transition duration-200 hover:-translate-y-0.5 hover:shadow-md"
+                className="group rounded-2xl border border-slate-200/80 bg-gradient-to-br from-white via-white to-sky-50/70 p-4 shadow-[0_10px_30px_-24px_rgba(15,23,42,0.45)] transition duration-200 hover:-translate-y-1 hover:border-sky-200 hover:shadow-lg"
               >
                 <div className="flex items-start justify-between">
                   <span className="text-xs font-medium text-slate-400">
@@ -687,7 +708,7 @@ export default function Page() {
               (c) => (
                 <span
                   key={c.nombre}
-                  className="rounded-md border border-slate-200 bg-white px-2 py-1 text-xs"
+                  className="rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-xs text-slate-600 shadow-sm"
                 >
                   {c.nombre}: {cityState[c.nombre]}
                   {cityState[c.nombre] === "en curso" && (
@@ -718,9 +739,10 @@ export default function Page() {
                     { n: "Seleccionados para cargar", v: chosenInView.length },
                   ] as const
                 ).map(({ n, v }) => (
-                  <div key={n} className="rounded-2xl border border-slate-100 bg-gradient-to-br from-slate-50 to-white p-4 shadow-sm">
-                    <p className="text-[11px] text-slate-500">{n}</p>
-                    <p className="mt-1 text-xl font-bold tabular-nums">{v}</p>
+                  <div key={n} className="group relative overflow-hidden rounded-2xl border border-slate-200/80 bg-gradient-to-br from-white to-sky-50/70 p-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+                    <span className="absolute -top-5 -right-4 size-16 rounded-full bg-cyan-200/20 blur-xl transition group-hover:bg-cyan-300/40" />
+                    <p className="relative text-[11px] font-medium tracking-wide text-slate-500">{n}</p>
+                    <p className="relative mt-1 text-2xl font-bold tracking-tight tabular-nums text-slate-900">{v}</p>
                   </div>
                 ))}
               </div>
@@ -757,7 +779,7 @@ export default function Page() {
               </button>
             </div>
           </div>
-          <div className="mt-5 grid gap-3 rounded-xl bg-slate-50 p-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-5 grid gap-3 rounded-2xl border border-sky-100 bg-gradient-to-br from-sky-50/90 via-white to-cyan-50/60 p-4 sm:grid-cols-2 lg:grid-cols-4">
             <div className="sm:col-span-2 lg:col-span-4">
               <p className="text-xs font-semibold tracking-wide text-slate-500 uppercase">
                 Filtrar registros válidos
@@ -843,7 +865,7 @@ export default function Page() {
                     setTab(t)
                     setPage(0)
                   }}
-                  className={`rounded-lg px-3 py-2 text-sm capitalize ${tab === t ? "bg-slate-900 text-white" : "text-slate-600 hover:bg-slate-100"}`}
+                  className={`rounded-xl px-3 py-2 text-sm capitalize ${tab === t ? "bg-slate-900 text-white shadow-md shadow-slate-900/15" : "text-slate-600 hover:bg-sky-50 hover:text-sky-800"}`}
                 >
                   {t}
                 </button>
